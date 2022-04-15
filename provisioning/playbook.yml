@@ -1,0 +1,28 @@
+- name: yum install
+  hosts: all
+  tasks:
+    - name: Upgrade all packages
+      become: yes
+      yum:
+        name: '*'
+        state: latest
+    - name: install-packages
+      become: yes
+      yum:
+        name:
+          - autoconf
+          - automake
+          - gcc
+          - gcc-c++
+          - libtool
+          - pkgconfig
+          - cppunit-devel
+          - ant
+          - which
+          - git 
+          - openssl-devel
+          - maven
+        state: present
+    - name: install arcus
+      become: yes
+      script: "{{ playbook_dir }}/install-arcus.sh"
